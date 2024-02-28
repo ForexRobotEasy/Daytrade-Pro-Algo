@@ -1,0 +1,96 @@
+
+// Daytrade Pro Algo
+// Developer's site: forexroboteasy.com
+// Developer: Forex Robot Easy Team
+
+// Include necessary libraries
+#include <Trade\Trade.mqh>
+#include <Trade\TradeState.mqh>
+
+// Define the list of pairs to trade
+string[] pairs = {'EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'XAUUSD', 'GBPJPY', 'USDCAD', 'EURJPY', 'EURNZD', 'EURAUD', 'NZDUSD', 'AUDJPY', 'CHFJPY'};
+
+// Define the main function
+void OnTick()
+{
+    // Check if the trading time is within market hours
+    if (!IsTradeAllowed())
+        return;
+    
+    // Loop through each pair in the list
+    for (int i = 0; i < ArraySize(pairs); i++)
+    {
+        // Check if the current pair is allowed for trading
+        if (!IsPairAllowed(pairs[i]))
+            continue;
+        
+        // Get the current price action and support/resistance levels for the pair
+        double currentPrice = SymbolInfoDouble(pairs[i], SYMBOL_BID);
+        double supportLevel = GetSupportLevel(pairs[i]);
+        double resistanceLevel = GetResistanceLevel(pairs[i]);
+        
+        // Check if the current price is near a support or resistance level
+        if (IsNearSupport(currentPrice, supportLevel) || IsNearResistance(currentPrice, resistanceLevel))
+        {
+            // Execute a trade based on the price action
+            if (currentPrice > resistanceLevel)
+                Buy(pairs[i]);
+            else if (currentPrice < supportLevel)
+                Sell(pairs[i]);
+        }
+    }
+}
+
+// Function to check if trading is allowed based on market hours
+bool IsTradeAllowed()
+{
+    // Add logic to check market hours here
+    return true;
+}
+
+// Function to check if a pair is allowed for trading
+bool IsPairAllowed(string pair)
+{
+    // Add logic to check if the pair is allowed for trading here
+    return true;
+}
+
+// Function to get the support level for a pair
+double GetSupportLevel(string pair)
+{
+    // Add logic to calculate the support level for the pair here
+    return 0;
+}
+
+// Function to get the resistance level for a pair
+double GetResistanceLevel(string pair)
+{
+    // Add logic to calculate the resistance level for the pair here
+    return 0;
+}
+
+// Function to check if the current price is near a support level
+bool IsNearSupport(double currentPrice, double supportLevel)
+{
+    // Add logic to check if the current price is near the support level here
+    return false;
+}
+
+// Function to check if the current price is near a resistance level
+bool IsNearResistance(double currentPrice, double resistanceLevel)
+{
+    // Add logic to check if the current price is near the resistance level here
+    return false;
+}
+
+// Function to execute a buy trade
+void Buy(string pair)
+{
+    // Add logic to execute a buy trade here
+}
+
+// Function to execute a sell trade
+void Sell(string pair)
+{
+    // Add logic to execute a sell trade here
+}
